@@ -27,7 +27,7 @@ I plan to create a new set of 2D stimuli and analyze them using computer vision 
 
 **Links**  
 - [GitHub Repo](https://github.com/Lena-Kemmelmeier/henderson2025/tree/main)  
-- [Original Paper](https://github.com/Lena-Kemmelmeier/henderson2025/tree/main/original_paper)  
+- [Original Paper](https://github.com/Lena-Kemmelmeier/henderson2025/blob/main/original_paper/henderson_2025.pdf)  
 
 ## Methods
 
