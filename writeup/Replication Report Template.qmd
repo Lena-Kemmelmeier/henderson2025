@@ -1,5 +1,5 @@
 ---
-title: "Replication of Study X by Sample & Sample (20xx, Psychological Science)"
+title: "Replication of Henderson et al. (2025, Nature Communications)"
 author: "Lena L. Kemmelmeier (lkemmelmeier@ucsd.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
