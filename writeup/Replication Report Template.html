@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Lena L. Kemmelmeier (lkemmelmeier@ucsd.edu)">
-<meta name="dcterms.date" content="2025-10-14">
+<meta name="dcterms.date" content="2025-10-27">
 
 <title>Replication of Henderson et al.&nbsp;(2025, Nature Communications)</title>
 <style>
@@ -52,13 +52,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
+  <li><a href="#reliability-and-validity" id="toc-reliability-and-validity" class="nav-link" data-scroll-target="#reliability-and-validity">Reliability and Validity</a></li>
   <li><a href="#power-analysis" id="toc-power-analysis" class="nav-link" data-scroll-target="#power-analysis">Power Analysis</a></li>
-  <li><a href="#planned-sample" id="toc-planned-sample" class="nav-link" data-scroll-target="#planned-sample">Planned Sample</a></li>
+  <li><a href="#sample" id="toc-sample" class="nav-link" data-scroll-target="#sample">Sample</a></li>
   <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">Materials</a></li>
   <li><a href="#procedure" id="toc-procedure" class="nav-link" data-scroll-target="#procedure">Procedure</a></li>
   <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis Plan</a></li>
   <li><a href="#differences-from-original-study" id="toc-differences-from-original-study" class="nav-link" data-scroll-target="#differences-from-original-study">Differences from Original Study</a></li>
-  <li><a href="#methods-addendum-post-data-collection" id="toc-methods-addendum-post-data-collection" class="nav-link" data-scroll-target="#methods-addendum-post-data-collection">Methods Addendum (Post Data Collection)</a></li>
   </ul></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
   <ul class="collapse">
@@ -95,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 14, 2025</p>
+      <p class="date">October 27, 2025</p>
     </div>
   </div>
   
@@ -110,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Henderson et al.&nbsp;(2025) investigated how representations of shape stimuli in the visual cortex change under different decision rule contexts. Participants categorized novel stimuli along two linear category boundaries and one non-linear category boundary during fMRI sessions. Behavioral (accuracy and reaction time) data and decoding of voxel activation data suggested that sensory shape representations adapted to support the discrimination of relevant categories, with there being more prominent effects for shapes close to the decision boundary.</p>
+<p>Henderson et al.&nbsp;(2025) investigated the neural mechanisms of perceptual categorization. Specifically, they examined how representations of shape stimuli in the visual cortex change under different decision rule contexts. Participants categorized novel stimuli along two linear category boundaries and one non-linear category boundary during fMRI sessions. Behavioral (accuracy and reaction time) data and decoding of voxel activation data suggested that sensory shape representations adapted to support the discrimination of relevant categories, with there being more prominent effects for shapes close to the decision boundary. Here, I attempted to replicate Henderson et al.’s key finding that . . and simulated . . .</p>
 <p><strong>Justification</strong><br>
 I will simulate data, rather than conduct an experiment, as my research does not lend itself to data collection this quarter. The research questions of Henderson et al.&nbsp;(2025) do not directly overlap with my first-year project; however, I chose to work with this study because it was led by former lab members and offers a unique opportunity to get familiar with pipelines and techniques that I may use in future projects, and which are broadly applicable to my research in human visual cognition. In attempting to reproduce a statistical result based on the decoding of voxel activation patterns (crucial to the paper’s main claim), I can gain familiarity with classification pipelines. I recognize that simulating fMRI data may fall a bit beyond the scope of this quarter, so instead, I plan to gain experience generating a new stimulus set and working with vision models like SimCLR and GIST in order to check the structure of the stimuli and their separability across boundaries. Taking these separate routes for the reproducibility check and simulation portions of the project will allow me to gain proficiency in different techniques valuable to my training in the Serences Lab.</p>
 <p><strong>Analyses/Techniques</strong></p>
@@ -129,21 +129,33 @@ I plan to create a new set of 2D stimuli and analyze them using computer vision 
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="reliability-and-validity" class="level3">
+<h3 class="anchored" data-anchor-id="reliability-and-validity">Reliability and Validity</h3>
+<p>The authors did not report any metrics that directly quantified the reliability of their data.</p>
+</section>
 <section id="power-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="power-analysis">Power Analysis</h3>
 <p>Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size. Considerations of feasibility for selecting planned sample size.</p>
 </section>
-<section id="planned-sample" class="level3">
-<h3 class="anchored" data-anchor-id="planned-sample">Planned Sample</h3>
-<p>Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.</p>
+<section id="sample" class="level3">
+<h3 class="anchored" data-anchor-id="sample">Sample</h3>
+<p>Ten participants (7 female) underwent three fMRI sessions, during which they completed a shape categorization task. Participants were recruited from the UCSD community, and were between 24 and 33 (M: 28.2, SD: 3.0) years old. All participants met inclusion criteria of having normal or corrected-to-normal vision.</p>
 </section>
 <section id="materials" class="level3">
 <h3 class="anchored" data-anchor-id="materials">Materials</h3>
-<p>All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely. Or, quote directly and just point out exceptions to what was described in the original article.</p>
+<p><strong>Shape Stimuli</strong></p>
+<p>[Describe how the shape stimuli were generated]</p>
+<p><strong>Main Task</strong></p>
+<p>This text below is directly quoted from the article, and describes the shape categorization task with the three different decision boundary manipulations. I will not be reproducing/simulating behavioral results so this was followed precisely.</p>
+<p>“The main experimental task consisted of categorizing shape silhouette stimuli (Fig. 1) into binary categories. There were three task conditions: Linear-1, Linear-2, and Nonlinear, each of which corresponded to a different binary categorization rule. Shape stimuli were drawn from a two-dimensional shape space coordinate system (see Shape stimuli). The Linear-1 and Linear-2 tasks used a boundary that was linear in this shape space, while the Nonlinear task used a boundary that was non-linear in this shape space (requiring participants to group non-adjacent quadrants into a single category, see Fig. 1 for illustration). Each trial consisted of the presentation of one shape for 1 s, and trials were separated by an inter-trial interval (ITI) that was variable in length, uniformly sampled from the interval 1–5 s. Participants responded on each trial with a button press (right index or middle finger) to indicate which binary category the currently viewed shape fell into; the mapping between category and response was counter-balanced within each scanning session. Participants were allowed to make a response anytime within the window of 2 s from stimulus onset. Feedback was given at the end of each run, and included the participant’s overall accuracy, as well as their accuracy broken down into “easy” and “hard” trials (see next paragraph for description of hard trials), and the number of trials on which they failed to respond. No feedback was given after individual trials.</p>
+<p>Each run in the task consisted of 48 trials and lasted 261 s (327 TRs). Of the 48 trials, 32 of these used shapes that were sampled from a grid of 16 points evenly spaced within shape space (“main grid”, see Shape stimuli), each repeated twice. These 16 shapes were presented twice per run regardless of task condition. The remaining 16 trials (referred to as “hard” trials) used shapes that were variable depending on the current task condition and the difficulty level set by the experimenter. The purpose of these trials was to allow the difficulty level to be controlled by the experimenter so that task accuracy could be equalized across all task conditions, and prevent any single task from being trivially easy for each participant. For each run of each task, the experimenter selected a difficulty level between 1 and 13, with each level corresponding to a particular bin of distances from the active categorization boundary (higher difficulty denotes closer distance to boundary). These difficulty levels were adjusted on each run during the session by the experimenter, based on performance on the previous run, with the goal of keeping the participant accuracy values within a stable range for all tasks (target range was around 80% accuracy). For the Nonlinear task, the distance was computed as a linear distance to the nearest boundary. The “hard” trials were generated by randomly sampling 16 shapes from the specified distance bin, with the constraint that 4 of the shapes had to come from each of the four quadrants in shape space. This manipulation ensured that responses were balanced across categories within each run. For many of the analyses presented here, we excluded these hard trials, focusing only on the “main grid” trials where the same images were shown across all task conditions.</p>
+<p>Participants performed 12 runs of the main task within each scanning session, for a total of 36 runs across all 3 sessions (with the exception of one participant (S06) for whom 3 runs are missing due to a technical error). The 12 runs in each session were divided into 6 total “parts” where each part consisted of a pair of 2 runs having the same task condition and the same response mapping (3 conditions × 2 response mappings = 6 parts). Each part was preceded by a short training run, which consisted of 5 trials, each trial consisting of a shape drawn from the main grid. The scanner was not on during these training runs, and the purpose of these was to remind the participant of both the currently active task and the response mapping before they began performing the task runs for that part. The order in which the 6 parts were shown was counter-balanced across sessions. Before each scan run began, the participant was again reminded of the current task and response mapping via a display that presented four prototype shapes, one for each shape space quadrant (see Shape stimuli for details on prototype shapes). The prototypes were arranged with two to the left of fixation and two to the right of fixation, and the participant was instructed that the two leftmost shapes corresponded to the index finger button and the two rightmost shapes corresponded to the middle finger button. This display of prototype shapes was also used during the training runs to provide feedback after each trial: after each training trial, the four prototype shapes were shown, and the two prototypes corresponding to the correct category were outlined in green, with accompanying text that indicated whether the participant’s response was correct or incorrect. This feedback display was not shown during the actual task runs.</p>
+<p>Before the scan sessions began, participants were trained to perform the shape categorization tasks in a separate behavioral session (training session took place on average 4.0 days before the first scan session). During this behavioral training session, participants performed the same task that they performed in the scanner, including 12 main task runs (2 runs for each combination of condition and response mapping; i.e., each of the 6 parts). As in the scan sessions, each part was preceded by training runs that consisted of 5 trials, each accompanied by feedback. Participants completed between 1 and 3 training runs before starting each part. Average training session accuracy was 0.81 ± 0.02 (mean ± SEM across 10 participants) for the Linear-1 task, 0.81 ± 0.02 for the Linear-2 task, and 0.78 ± 0.02 for the Nonlinear task.”</p>
 </section>
 <section id="procedure" class="level3">
 <h3 class="anchored" data-anchor-id="procedure">Procedure</h3>
 <p>Can quote directly from original article - just put the text in quotations and note that this was followed precisely. Or, quote directly and just point out exceptions to what was described in the original article.</p>
+<p>[describe/quote from the paper]</p>
 </section>
 <section id="analysis-plan" class="level3">
 <h3 class="anchored" data-anchor-id="analysis-plan">Analysis Plan</h3>
@@ -153,18 +165,7 @@ I plan to create a new set of 2D stimuli and analyze them using computer vision 
 <section id="differences-from-original-study" class="level3">
 <h3 class="anchored" data-anchor-id="differences-from-original-study">Differences from Original Study</h3>
 <p>Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study. The goal, of course, is to minimize those differences, but differences will inevitably occur. Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.</p>
-</section>
-<section id="methods-addendum-post-data-collection" class="level3">
-<h3 class="anchored" data-anchor-id="methods-addendum-post-data-collection">Methods Addendum (Post Data Collection)</h3>
-<p>You can comment this section out prior to final report with data collection.</p>
-<section id="actual-sample" class="level4">
-<h4 class="anchored" data-anchor-id="actual-sample">Actual Sample</h4>
-<p>Sample size, demographics, data exclusions based on rules spelled out in analysis plan</p>
-</section>
-<section id="differences-from-pre-data-collection-methods-plan" class="level4">
-<h4 class="anchored" data-anchor-id="differences-from-pre-data-collection-methods-plan">Differences from pre-data collection methods plan</h4>
-<p>Any differences from what was described as the original plan, or “none”.</p>
-</section>
+<p>This is shaping up nicely! As you go forward, focus on: 1. Clarify and make the decoding confirmatory analysis executable, adding in details Explicitly state that your dependent variable is classifier accuracy per ROI × Task × Boundary × Distance. If implementing the decoding from scratch proves too challenging, consider the preprocessed data as a fallback — there’s still a lot there When you write the Analysis Plan section, pre-specify that your confirmatory test will be a repeated-measures ANOVA on accuracy with factors ROI, Task, Boundary, and Distance, focusing on the Task × Boundary interaction for near trials. Define your reproduction success criterion clearly: same direction and significance (Linear-2 &gt; Linear-1 for near trials). If the decoding is done from scratch, you’ll have some random variation — but the means should be within a certain range? 2. Simulation and feature-space analysis I still think that your plan to simulate new shape stimuli and evaluate them in SimCLR and GIST is ambitious but well-justified. To make it tractable and fold well into the report: Add a brief rationale connecting this to the fMRI decoding result For visualization, I would plan a simple PCA/tSNE plot of model features, annotated by boundary type. Note if there are any exploratory analyses you might also conduct here Want to connect you with Haoyu who is also completing a computational modeling portion of her project using CLIP 3. Other things to note Differences from Original Study: Note that you are reproducing only the decoding + ANOVA portions, not the full fMRI acquisition, and that your simulation substitutes voxel data with feature-space embeddings. Results: Plan to include a side-by-side panel showing your replicated accuracy pattern next to the original Task × Boundary figure, with effect sizes and confidence intervals. Mixing R vs Python — you’re allowed to do both, no need to choose one.</p>
 </section>
 </section>
 <section id="results" class="level2">

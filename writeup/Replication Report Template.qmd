@@ -12,7 +12,7 @@ format:
 
 ## Introduction
 
-Henderson et al. (2025) investigated how representations of shape stimuli in the visual cortex change under different decision rule contexts. Participants categorized novel stimuli along two linear category boundaries and one non-linear category boundary during fMRI sessions. Behavioral (accuracy and reaction time) data and decoding of voxel activation data suggested that sensory shape representations adapted to support the discrimination of relevant categories, with there being more prominent effects for shapes close to the decision boundary.
+Henderson et al. (2025) investigated the neural mechanisms of perceptual categorization. Specifically, they examined how representations of shape stimuli in the visual cortex change under different decision rule contexts. Participants categorized novel stimuli along two linear category boundaries and one non-linear category boundary during fMRI sessions. Behavioral (accuracy and reaction time) data and decoding of voxel activation data suggested that sensory shape representations adapted to support the discrimination of relevant categories, with there being more prominent effects for shapes close to the decision boundary. Here, I attempted to replicate Henderson et al.'s key finding that . . and simulated . . . 
 
 **Justification**  
 I will simulate data, rather than conduct an experiment, as my research does not lend itself to data collection this quarter. The research questions of Henderson et al. (2025) do not directly overlap with my first-year project; however, I chose to work with this study because it was led by former lab members and offers a unique opportunity to get familiar with pipelines and techniques that I may use in future projects, and which are broadly applicable to my research in human visual cognition. In attempting to reproduce a statistical result based on the decoding of voxel activation patterns (crucial to the paper’s main claim), I can gain familiarity with classification pipelines. I recognize that simulating fMRI data may fall a bit beyond the scope of this quarter, so instead, I plan to gain experience generating a new stimulus set and working with vision models like SimCLR and GIST in order to check the structure of the stimuli and their separability across boundaries. Taking these separate routes for the reproducibility check and simulation portions of the project will allow me to gain proficiency in different techniques valuable to my training in the Serences Lab.
@@ -38,44 +38,78 @@ For this simulation portion, I think a main challenge will be figuring out how t
 
 ## Methods
 
+### Reliability and Validity
+The authors did not report any metrics that directly quantified the reliability of their data.
+
 ### Power Analysis
 
 Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
 
-### Planned Sample
+### Sample
 
-Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.
+Ten participants (7 female) underwent three fMRI sessions, during which they completed a shape categorization task. Participants were recruited from the UCSD community, and were between 24 and 33 (M: 28.2, SD: 3.0) years old. All participants met inclusion criteria of having normal or corrected-to-normal vision.
 
 ### Materials
 
-All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+**Shape Stimuli**
+
+The below section is adapted from Henderson et al. (2025). I will follow the same general procedure to generate a two-dimensional shape space, except that I will use a different combination of radial frequency components (RFCs) than those used in the original experiment. As in the original design, the amplitudes of two RFCs will be parametrically varied while all other RFCs remain constant.
+
+I will follow the same overall procedure for constructing a two-dimensional shape space but will vary a different pair of radial frequency components (RFCs) than those used in the original study. Each RFC defines a sinusoidal modulation of a base circle’s radius as a function of angle, and varying its amplitude changes the prominence of that modulation in the contour. As in the original design, the amplitudes of two RFCs will be systematically varied while the remaining RFCs are held constant. These two amplitude values define the x and y coordinates of a continuous two-dimensional shape space, where each coordinate pair corresponds to a unique silhouette.
+
+The manipulation of RFC amplitude defines an x/y grid that spans positions between 0 and 5 arbitrary units, representing relative changes in modulation strength. In contrast to the original 4x4 grid of 16 stimuli with coordinates [0.1, 1.7, 3.3, 4.9], I will generate a 6x6 grid of 36 stimuli covering the same range. Grid positions will be evenly spaced and slightly inset from the edges ([0.1, 1.06, 2.02, 2.98, 3.94, 4.9]). This denser grid sampled from the shape space leads to smoother transitions between neighboring shapes. The overall coordinate system (0–5 range with a midpoint at 2.5) remains the same.
+
+"We used a set of shape silhouette stimuli that varied parametrically along two continuous dimensions, generating a 2-dimensional shape space (Fig. 1A). Each shape in this space was a closed contour composed of RFCs29,30. Each shape was composed of 7 different RFCs, where each component has a frequency, amplitude, and phase. We selected these stimuli because they can be represented in a low-dimensional grid-like coordinate system, but are more complex and abstract relative to simpler stimuli such as oriented gratings. Importantly, the changes along each axis in the shape space involve variability in multiple regions of the image, so categorizing the shapes correctly required participants to integrate information globally across the image, rather than focusing on a single part of the shape. For example, to categorize the shapes along axis 1 (Fig. 1A), it might be necessary to integrate information about both the size of the top left lobe, and the shape of the protrusion on the right side. Thus, it would not be possible to categorize the shapes by attending to one focal spatial location only.
+
+To generate the 2-dimensional shape space, we parametrically varied the amplitude of two RFCs, leaving the others constant. The manipulation of RFC amplitude was used to define an x/y grid in arbitrary units that spanned positions between 0 and 5 arb. units, with adjacent grid positions spaced by 0.1 arb. units. All shape space positions on all trials were sampled from this grid of shape space positions. We also defined a coarser grid of 16 points (a 4 × 4 grid) which was used to generate the 16 stimuli that were shown on the majority of trials; this grid is referred to as the “main grid”, and included all x/y combinations of the points [0.1, 1.7, 3.3, 4.9] in shape space coordinates. Stimuli corresponding to points in shape space that were not part of the main grid were used to make the tasks more difficult, see Main task design for details.
+
+We divided the shape space into four quadrants by imposing boundaries at the center position of the grid (2.5 arb. units) in each dimension. To define the binary categories that were relevant for each task (see Main task design), we grouped together two quadrants at a time, with the Linear-1 task and Linear-2 tasks grouping quadrants that were adjacent (creating either a vertical or horizontal linear boundary in shape space), and the Nonlinear task grouping quadrants that were non-adjacent (creating a non-linear boundary). During task training as well as before each scanning run, we utilized a “prototype” image for each shape space quadrant as a way of reminding participants of the current categorization rule. The prototype for each quadrant was positioned directly in the middle of the four main grid positions corresponding to that quadrant (i.e., the x/y coordinates for the prototypes were combinations of [0.9, 4.1] arb. units). These prototype images were never shown during the categorization task trials, to prevent participants from simply memorizing the prototypes. Shapes used in the task were also never positioned exactly on any quadrant boundary in order to prevent any ambiguity about category."
+
 
 ### Procedure	
 
-Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+**Main Task**
+
+This text below is directly quoted from Henderson et. al, and describes the shape categorization task with the three different decision boundary manipulations as well as the general procedure of the experiment. I will not be reproducing/simulating behavioral results so this was 'followed precisely.''
+
+"The main experimental task consisted of categorizing shape silhouette stimuli (Fig. 1) into binary categories. There were three task conditions: Linear-1, Linear-2, and Nonlinear, each of which corresponded to a different binary categorization rule. Shape stimuli were drawn from a two-dimensional shape space coordinate system (see Shape stimuli). The Linear-1 and Linear-2 tasks used a boundary that was linear in this shape space, while the Nonlinear task used a boundary that was non-linear in this shape space (requiring participants to group non-adjacent quadrants into a single category, see Fig. 1 for illustration). Each trial consisted of the presentation of one shape for 1 s, and trials were separated by an inter-trial interval (ITI) that was variable in length, uniformly sampled from the interval 1–5 s. Participants responded on each trial with a button press (right index or middle finger) to indicate which binary category the currently viewed shape fell into; the mapping between category and response was counter-balanced within each scanning session. Participants were allowed to make a response anytime within the window of 2 s from stimulus onset. Feedback was given at the end of each run, and included the participant’s overall accuracy, as well as their accuracy broken down into “easy” and “hard” trials (see next paragraph for description of hard trials), and the number of trials on which they failed to respond. No feedback was given after individual trials.
+
+Each run in the task consisted of 48 trials and lasted 261 s (327 TRs). Of the 48 trials, 32 of these used shapes that were sampled from a grid of 16 points evenly spaced within shape space (“main grid”, see Shape stimuli), each repeated twice. These 16 shapes were presented twice per run regardless of task condition. The remaining 16 trials (referred to as “hard” trials) used shapes that were variable depending on the current task condition and the difficulty level set by the experimenter. The purpose of these trials was to allow the difficulty level to be controlled by the experimenter so that task accuracy could be equalized across all task conditions, and prevent any single task from being trivially easy for each participant. For each run of each task, the experimenter selected a difficulty level between 1 and 13, with each level corresponding to a particular bin of distances from the active categorization boundary (higher difficulty denotes closer distance to boundary). These difficulty levels were adjusted on each run during the session by the experimenter, based on performance on the previous run, with the goal of keeping the participant accuracy values within a stable range for all tasks (target range was around 80% accuracy). For the Nonlinear task, the distance was computed as a linear distance to the nearest boundary. The “hard” trials were generated by randomly sampling 16 shapes from the specified distance bin, with the constraint that 4 of the shapes had to come from each of the four quadrants in shape space. This manipulation ensured that responses were balanced across categories within each run. For many of the analyses presented here, we excluded these hard trials, focusing only on the “main grid” trials where the same images were shown across all task conditions.
+
+Participants performed 12 runs of the main task within each scanning session, for a total of 36 runs across all 3 sessions (with the exception of one participant (S06) for whom 3 runs are missing due to a technical error). The 12 runs in each session were divided into 6 total “parts” where each part consisted of a pair of 2 runs having the same task condition and the same response mapping (3 conditions × 2 response mappings = 6 parts). Each part was preceded by a short training run, which consisted of 5 trials, each trial consisting of a shape drawn from the main grid. The scanner was not on during these training runs, and the purpose of these was to remind the participant of both the currently active task and the response mapping before they began performing the task runs for that part. The order in which the 6 parts were shown was counter-balanced across sessions. Before each scan run began, the participant was again reminded of the current task and response mapping via a display that presented four prototype shapes, one for each shape space quadrant (see Shape stimuli for details on prototype shapes). The prototypes were arranged with two to the left of fixation and two to the right of fixation, and the participant was instructed that the two leftmost shapes corresponded to the index finger button and the two rightmost shapes corresponded to the middle finger button. This display of prototype shapes was also used during the training runs to provide feedback after each trial: after each training trial, the four prototype shapes were shown, and the two prototypes corresponding to the correct category were outlined in green, with accompanying text that indicated whether the participant’s response was correct or incorrect. This feedback display was not shown during the actual task runs.
+
+Before the scan sessions began, participants were trained to perform the shape categorization tasks in a separate behavioral session (training session took place on average 4.0 days before the first scan session). During this behavioral training session, participants performed the same task that they performed in the scanner, including 12 main task runs (2 runs for each combination of condition and response mapping; i.e., each of the 6 parts). As in the scan sessions, each part was preceded by training runs that consisted of 5 trials, each accompanied by feedback. Participants completed between 1 and 3 training runs before starting each part. Average training session accuracy was 0.81 ± 0.02 (mean ± SEM across 10 participants) for the Linear-1 task, 0.81 ± 0.02 for the Linear-2 task, and 0.78 ± 0.02 for the Nonlinear task."
+
 
 ### Analysis Plan
 
 Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
 
+**Image Similarity Analysis**
+2. Simulation and feature-space analysis
+I still think that your plan to simulate new shape stimuli and evaluate them in SimCLR and GIST is ambitious but well-justified. To make it tractable and fold well into the report:
+Add a brief rationale connecting this to the fMRI decoding result
+
+**Multivariate Classifier Analysis**
+
+1. Clarify and make the decoding confirmatory analysis executable, adding in details
+Explicitly state that your dependent variable is classifier accuracy per ROI × Task × Boundary × Distance.
+If implementing the decoding from scratch proves too challenging, consider the preprocessed data as a fallback — there’s still a lot there
+When you write the Analysis Plan section, pre-specify that your confirmatory test will be a repeated-measures ANOVA on accuracy with factors ROI, Task, Boundary, and Distance, focusing on the Task × Boundary interaction for near trials.
+Define your reproduction success criterion clearly: same direction and significance (Linear-2 > Linear-1 for near trials). If the decoding is done from scratch, you’ll have some random variation — but the means should be within a certain range?
+
 **Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
 
 ### Differences from Original Study
 
-Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
-
-### Methods Addendum (Post Data Collection)
-
-You can comment this section out prior to final report with data collection.
-
-#### Actual Sample
-  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
-
-#### Differences from pre-data collection methods plan
-  Any differences from what was described as the original plan, or “none”.
-
+3. Other things to note
+Differences from Original Study: Note that you are reproducing only the decoding + ANOVA portions, not the full fMRI acquisition, and that your simulation substitutes voxel data with feature-space embeddings.
 
 ## Results
+
+Note from Bria for the results: Plan to include a side-by-side panel showing your replicated accuracy pattern next to the original Task × Boundary figure, with effect sizes and confidence intervals.
+
+For image similarity (another note from Bria): For visualization, I would plan a simple PCA/tSNE plot of model features, annotated by boundary type.
 
 
 ### Data preparation
